@@ -70,6 +70,7 @@ function initialize() {
 	[x.locName,x.latitude,x.longitude,x.id],
 	[y.locName,y.latitude,y.longitude,y.id]
   ];
+  console.log(markers);
   setmarkers(map,markers);
 
 };
