@@ -6,7 +6,6 @@
     <title>Simple icons</title>
     <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
      <link rel="stylesheet" type="text/css" href="styles.css" />
         <script>
 
@@ -24,13 +23,11 @@ function accident(town,county,locName,latitude,longitude,time,fatalities,weather
 	this.notes = notes;
 };
 
-function setMarkers(map, locations) {
-  // Add markers to the map from locations
-  var image = 'marker.png';
-  for (var i = 0; i < locations.length; i++) {
-    var mark = locations[i];
-    var myLatLng = new google.maps.LatLng(mark[1], mark[2]);
-    var marker = new google.maps.Marker({
+
+function createMarker( mark, map ) {
+	var image = 'marker.png';
+	var myLatLng = new google.maps.LatLng(mark[1], mark[2]);
+   var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
         icon: image,
@@ -38,19 +35,23 @@ function setMarkers(map, locations) {
         zIndex: mark[3]
     });
 	
-	google.maps.event.addListener( marker, 'click', function() {
-		document.getElementById( 'sidebar' ).className = "in";
-		document.getElementById( 'sidebar' ).innerHTML = '<h4>' + mark[ 0 ] + '</h4>'
-			+ 'test1'
-			+ mark[ 1 ] + '<br>'
-			+ mark[ 2 ] + '<br>';
-			
-	google.maps.event.addListener(map, 'click', function() {
-	document.getElementById( 'sidebar' ).className = "out";
-	document.getElementById( 'sidebar' ).innerHTML = '';
-	});
-	});
+    google.maps.event.addListener( marker, 'click', function( a ) {
+	document.getElementById( 'sidebar' ).className = "in";
+	document.getElementById( 'sidebar' ).innerHTML = '<h4>' + marker.title + '</h4>' + '<br>' + mark[2].toString() + '<br>'; 
+    });
+
+}
+
+function setMarkers(map, locations) {
+  // Add markers to the map from locations
+  window.allthemarkers = new Array();
+  for (var i = 0; i < locations.length; i++) {
+	createMarker( locations[i], map );
   }
+  google.maps.event.addListener(map, 'click', function() {
+    document.getElementById( 'sidebar' ).className = "out";
+    document.getElementById( 'sidebar' ).innerHTML = '';
+  });
   
 };
 
