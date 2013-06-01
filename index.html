@@ -77,6 +77,13 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 //Create the map using the initialize function
 
+//location point
+ window.onload = function() {
+  document.getElementById('add').addEventListener('click', function (point) {
+   alert ("Click on the map, or select an already existing pointer, to mark the location of the crash.");
+  });
+
+};
     </script>
   </head>
   <body>
@@ -89,7 +96,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div id="sidebar">My sidebar</div>
 
    </div>
-   <a href="#addwindow"><img src="add.png"  id="add"></a>
+   <img src="add.png"  id="add">
    </div>
    
   </body>
