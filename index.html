@@ -37,14 +37,21 @@ function setMarkers(map, locations) {
         title: mark[0],
         zIndex: mark[3]
     });
+	
 	google.maps.event.addListener( marker, 'click', function() {
 		document.getElementById( 'sidebar' ).className = "in";
 		document.getElementById( 'sidebar' ).innerHTML = '<h4>' + mark[ 0 ] + '</h4>'
 			+ 'test1'
 			+ mark[ 1 ] + '<br>'
 			+ mark[ 2 ] + '<br>';
+			
+	google.maps.event.addListener(map, 'click', function() {
+	document.getElementById( 'sidebar' ).className = "out";
+	document.getElementById( 'sidebar' ).innerHTML = '';
+	});
 	});
   }
+  
 };
 
 function initialize() {

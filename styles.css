@@ -14,6 +14,10 @@
 	margin-left: 0px !important;
 	transition: all 1s ease-in-out;
 }
+.out {
+	margin-left:-250px !important;
+	transition: all 1s ease-in-out;	
+}
 #over_map { 
 	position: absolute; 
 	top: 10px; 
