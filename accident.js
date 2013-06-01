@@ -10,5 +10,5 @@ function accident(town,county,locName,latitude,longitude,time,fatalities,weather
 	this.notes = notes;
   }
 
-var union = new accident('Bangor','Penobscot','Union Street x I-95', 44.812121, -68.790245, '2013-06-01T12:37:04',0,'Raining');
+var x = new accident('Bangor','Penobscot','Union Street x I-95', 44.812121, -68.790245, '2013-06-01T12:37:04',0,'Raining');
 console.log(union);
