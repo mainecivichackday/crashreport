@@ -1,3 +1,23 @@
 @charset "UTF-8";
 /* CSS Document */
-
+#wrapper { position: relative; }
+#sidebar {
+    float:left;
+    height:100%;
+    position:fixed;
+    background-color:#CCC;
+    width:200px;
+    display:block;
+	
+}
+#over_map { 
+	position: absolute; 
+	top: 10px; 
+	left: 10px; 
+	z-index: 99; 
+	}
+	
+	#map-canvas {
+   height:600px;
+	 
+}
