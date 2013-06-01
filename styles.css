@@ -5,10 +5,12 @@
     float:left;
     height:100%;
     position:fixed;
-    background-color:#CCC;
+    background-color:#000;
+	color:#FFF;
     width:200px;
     display:block;
 	margin-left: -250px;
+	opacity:0.8;
 }
 .in {
 	margin-left: 0px !important;
@@ -28,4 +30,24 @@
 	#map-canvas {
    height:600px;
 	 
+}
+#add {
+	height:40px;
+	width:100px;
+	position:absolute;
+	right:10px;
+	bottom:20px;
+	display:block;
+	z-index:99;
+	
+}
+#addwindow {
+	height:400px;
+	width:300px;
+	position:absolute;
+	right:100px;
+	top:200px;
+	background-color:#000;	
+	display:block;
+	z-index:99;
 }
