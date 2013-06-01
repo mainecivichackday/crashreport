@@ -55,6 +55,11 @@ function setMarkers(map, locations) {
     document.getElementById( 'sidebar' ).className = "out";
     document.getElementById( 'sidebar' ).innerHTML = '';
   });
+
+  google.maps.event.addListener(map, 'click', function() {
+    document.getElementById( 'sidebar' ).className = "out";
+    document.getElementById( 'sidebar' ).innerHTML = '';
+  });
   
 };
 
