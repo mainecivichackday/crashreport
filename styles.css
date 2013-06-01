@@ -8,7 +8,11 @@
     background-color:#CCC;
     width:200px;
     display:block;
-	
+	margin-left: -250px;
+}
+.in {
+	margin-left: 0px !important;
+	transition: all 1s ease-in-out;
 }
 #over_map { 
 	position: absolute; 
