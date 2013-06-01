@@ -9,29 +9,9 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
      <link rel="stylesheet" type="text/css" href="styles.css" />
         <script>
-//THIS IS WHERE I CHANGES THINGS!!
-
-/*
-function initialize() {
-  var mapOptions = {
-    zoom: 16,
-    center: new google.maps.LatLng(44.812111,-68.790441),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  }
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-                                mapOptions);
-
-  var image = 'marker.png';
-  var myLatLng = new google.maps.LatLng(44.812111,-68.790441);
-  var beachMarker = new google.maps.Marker({
-      position: myLatLng,
-      map: map,
-      icon: image
-  });
-}
-*/
 
 function accident(town,county,locName,latitude,longitude,time,fatalities,weather,id,notes) {
+	// Object for individual accidents. Should be taken out once JSON data is coming in.
 	this.town = town;
 	this.county = county;
 	this.locName = locName;
@@ -42,39 +22,18 @@ function accident(town,county,locName,latitude,longitude,time,fatalities,weather
 	this.weather = weather;
 	this.id = id;
 	this.notes = notes;
-
-  }
+};
 
 function setMarkers(map, locations) {
-  // Add markers to the map
-  // Marker sizes are expressed as a Size of X,Y
-  // where the origin of the image (0,0) is located
-  // in the top left of the image.
-  // Origins, anchor positions and coordinates of the marker
-  // increase in the X direction to the right and in
-  // the Y direction down.
+  // Add markers to the map from locations
   var image = 'marker.png';
-    //size: new google.maps.Size(20, 32),
-    //origin: new google.maps.Point(0,0),
-    //anchor: new google.maps.Point(0, 32)
-  // Shapes define the clickable region of the icon.
-  // The type defines an HTML <area> element 'poly' which
-  // traces out a polygon as a series of X,Y points. The final
-  // coordinate closes the poly by connecting to the first
-  // coordinate.
-  //var shape = {
-  //    coord: [1, 1, 1, 20, 18, 20, 18 , 1],
-  //    type: 'poly'
-  //};
   for (var i = 0; i < locations.length; i++) {
     var mark = locations[i];
     var myLatLng = new google.maps.LatLng(mark[1], mark[2]);
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        //shadow: shadow,
         icon: image,
-        //shape: shape,
         title: mark[0],
         zIndex: mark[3]
     });
@@ -86,9 +45,10 @@ function setMarkers(map, locations) {
 			+ mark[ 2 ] + '<br>';
 	});
   }
-}
+};
 
 function initialize() {
+  //Initialize the Google map
   var mapOptions = {
     zoom: 16,
     center: new google.maps.LatLng(44.812111,-68.790441),
@@ -96,12 +56,6 @@ function initialize() {
   }
   var map = new google.maps.Map(document.getElementById('map-canvas'),
                                 mapOptions);
-  //var image = 'marker.png';
-  //var myLatLng = new google.maps.LatLng(44.812111,-68.790441);
-  //var beachMarker = new google.maps.Marker({
-  //    position: myLatLng,
-  //    map: map,
-  //    icon: image
   var x = new accident('Bangor','Penobscot','Union Street Ramp Intersections', 44.810427, -68.79227, '2013-05-30T10:28:12',1,'Snow',0);
   var y = new accident('Bangor','Penobscot','Union Street x I-95', 44.812121, -68.790245, '2013-06-01T12:37:04',0,'Raining',1);
   var markers = [
@@ -111,9 +65,14 @@ function initialize() {
   setMarkers(map,markers);
 
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> d45bd1483b2daf4fcf72b6a7423578e7902d4276
 
 //THIS IS WHERE I CHANGES THINGS!!
 google.maps.event.addDomListener(window, 'load', initialize);
+//Create the map using the initialize function
 
     </script>
   </head>
