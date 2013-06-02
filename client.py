@@ -7,13 +7,14 @@ import tornado.web
 import tornado.template
 import pywapi
 import string
+import json
 from datetime import datetime
 
 TLoader = tornado.template.Loader("./");
 
 class MainHandler(tornado.web.RequestHandler):
         def get(self):
-                self.write(TLoader.load("index-form.htm").generate());
+                self.write(TLoader.load("index.htm").generate());
         def post(self):
                 town = self.get_argument("town");
                 county = self.get_argument("county");
@@ -23,9 +24,11 @@ class MainHandler(tornado.web.RequestHandler):
                 longitude = self.get_argument("longitude");
                 time = datetime.now();
                 fatalities = self.get_argument("fatalities");
-                weather_dic = pywapi.get_weather_from_yahoo("USME0017");
+                weather_dic = pywapi.get_weather_from_yahoo(pywapi.get_location_ids(town + ", " + state).keys()[0]);
                 weather = (weather_dic['condition']['text']) + ", " + (weather_dic['condition']['temp']) + "C.";
-                self.write(TLoader.load("post.htm");
+                crashinfo = json.dumps({'town': town, 'county': county, 'state': state, 'location': location, 'latitude': latitude, 'longitude': longitude, 'time': tim$
+                self.write(crashinfo);
+
 application = tornado.web.Application([(r"/", MainHandler),])
 
 if __name__ == "__main__":
