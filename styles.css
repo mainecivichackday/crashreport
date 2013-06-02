@@ -30,32 +30,16 @@ border-radius: 10px; /* future proofing */
 -khtml-border-radius: 10px; /* for old Konqueror browsers */
 
 }
-#inputform1  {
-    height:220px;
-    position:fixed;
-	right: 0;
-    background-color:#FFF;
-	color:#000;
-    width:600px;
-    display:block;
-	margin-right:50px;
-	border: 2px groove threedface;
-	-moz-border-radius: 10px;
--webkit-border-radius: 10px;
-border-radius: 10px; /* future proofing */
--khtml-border-radius: 10px; /* for old Konqueror browsers */
 
-}
 #tableform {
-	max-width:600px;
+	max-width:560px;
+	margin-left:20px;
 	
 }
 #tableform td{
-	max-width:200px;
+	width:300px;
 }
-#tableform input {
-	max-width:100px;	
-}
+
 .in {
 	margin-left: 0px !important;
 	transition: all 1s ease-in-out;
