@@ -124,8 +124,11 @@ function changeYear(yr){
   }
 }
 
+var old;
 function cancel(){
 	document.getElementById( 'inputform' ).className = "out2";
+	old.setMap(null)
+
 }
 
 //location point
@@ -142,7 +145,6 @@ function cancel(){
    alert ("Click on the map, or select an already existing pointer, to mark the location of the crash.");
    //----
    var clicked = false;
-   var old;
    google.maps.event.addListener(map, 'click', function( event ){
 	if (clicked == true) {
 		old.setMap(null)
