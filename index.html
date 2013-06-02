@@ -109,7 +109,6 @@ google.maps.event.addDomListener(window, 'load');
 
 function changeTotalCrashes(max){
   for (var i=0; i<markers.length; i++){
-    console.log(markers[i][4]);
     if (markers[i][4] < max){
       markerName[i].setMap(null);
     }
@@ -121,12 +120,17 @@ function changeTotalCrashes(max){
 
 function changeYear(yr){
   for (var i=0; i<markers.length; i++){
-    console.log(markers[i][10]);
+    var y = markers[i][10];
+    console.log(y);
+    console.log(typeof y);
+    y = y.substr(0,4);
+    y = parseInt(y);
+    console.log(y);
     if (yr == 0){
       markerName[i].setMap(map);
     }
     else{
-      if (markers[i][4] == yr){
+      if (y == yr){
         markerName[i].setMap(map);
       }
       else{
