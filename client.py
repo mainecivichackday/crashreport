@@ -89,7 +89,15 @@ class MainHandler(tornado.web.RequestHandler):
                 fatalities = self.get_argument("fatalities");
                 weather_dic = pywapi.get_weather_from_yahoo(pywapi.get_location_ids(town + ", " + state).keys()[0]);
                 weather = (weather_dic['condition']['text']) + ", " + (weather_dic['condition']['temp']) + "C.";
-                crashinfo = json.dumps({'town': town, 'county': county, 'state': state, 'location': location, 'latitude': latitude, 'longitude': longitude, 'time': tim$
+                crashinfo = json.dumps({
+                    'town': town, 
+                    'county': county, 
+                    'state': state, 
+                    'location': location, 
+                    'latitude': latitude, 
+                    'longitude': longitude, 
+                    'time': time,
+                })
                 self.write(crashinfo)
                 self.finish()
 
