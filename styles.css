@@ -57,6 +57,10 @@ border-radius: 10px; /* future proofing */
 	margin-top:100px !important;
 	transition: all 1s ease-in-out;
 }
+.out2 {
+	margin-top:-300px !important;
+	transition: all 1s ease-in-out;
+}
 .out {
 	margin-left:-325px !important;
 	transition: all 1s ease-in-out;	
@@ -114,4 +118,11 @@ border-radius: 10px; /* future proofing */
 .rightout {
 		margin-right: -200px !important;
 	transition: all 1s ease-in-out;
+}
+.toolclass h4{
+	color:#FFF;
+	border-color:#FFF;
+	border-bottom:solid;
+	padding:0px;
+	margin:3px;
 }
