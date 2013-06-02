@@ -16,7 +16,6 @@ $.ajax('/api/1/report',
 	{
 		dataType: 'json',
 		success: function (accidents, textStatus, jqXHR) {
-			console.log(accidents);
 			for (var i=0; i<accidents.length; i++){
 				markers.push( [accidents[i].location_start,parseFloat(accidents[i].latitude), 
 				parseFloat(accidents[i].longitude),parseFloat(accidents[i].crf),
@@ -89,13 +88,12 @@ google.maps.event.addDomListener(window, 'load');
 
 //location point
  window.onload = function() {
-	document.getElementById('rightslide').addEventListener('click', function (point) {
-		document.getElementById( 'rightslide' ).className = "rightin";
-		google.maps.event.addListener(map, 'click', function() {
-		document.getElementById( 'rightslide' ).className = "rightout";
-	});
-	});
-	
+  document.getElementById('rightslide').addEventListener('click', function (point) {
+    document.getElementById( 'rightslide' ).className = "rightin";
+    google.maps.event.addListener(map, 'click', function() {
+    document.getElementById( 'rightslide' ).className = "rightout";
+    });
+  });
 	
   document.getElementById('add').addEventListener('click', function (point) {
    alert ("Click on the map, or select an already existing pointer, to mark the location of the crash.");
@@ -140,7 +138,7 @@ google.maps.event.addDomListener(window, 'load');
      <div id="over_map">
 <div id="sidebar">My sidebar</div>
 <div id="inputform">
-<form action="handler.php" method="POST">
+<form action="" method="POST">
 <table id="tableform"><tr>
 <td>Town/City:</td>
 <td> <input type="text" name="town"></td>
@@ -163,8 +161,8 @@ google.maps.event.addDomListener(window, 'load');
 <td>Notes:</td>
 <td><textarea name="notes" cols="25" rows="5">
 </textarea></td>
-<td><input type="hidden" name="newlat"></td>
-<td><input type="hidden" name="newlong"></td>
+<td><input type="hidden" name="newlat"  width="0px"><input type="hidden" name="newlong" width="0px"></td>
+<td></td>
 
  
  <td>
@@ -178,8 +176,13 @@ google.maps.event.addDomListener(window, 'load');
    <img src="tools.png" style="margin-left:-35px; margin-top:-7px;">
    <div style="float:right; width:190px; font-size:14px;">
    <form>
+
 <input type="radio" name="totalCrashes" value="GT10">Show total crashes &gt 10<br>
 <input type="radio" name="totalCrashes" value="GT20">Show total crashes &gt 20
+
+<input type="checkbox" name="totalGT10" value="GT10">Show total crashes &gt 10<br>
+<input type="checkbox" name="totalGT20" value="GT20">Show total crashes &gt 20
+
 </form>
 </div>
    </div>
