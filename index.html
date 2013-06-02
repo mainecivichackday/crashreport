@@ -19,7 +19,7 @@ $.ajax('/api/1/report',
 		'success': function (data, textStatus, jqXHR) {
 			console.log(textStatus,data);
 		}
-	}
+	});
 
 function accident(town,county,locName,latitude,longitude,time,fatalities,weather,id,notes) {
 	// Object for individual accidents. Should be taken out once JSON data is coming in.
