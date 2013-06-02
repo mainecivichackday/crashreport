@@ -48,6 +48,10 @@ function submitAccident() {
   return false;
 };
 
+$(document).ready(function () {
+  $('#new-accident-report').submit(submitAccident);
+});
+
 function createMarker( mark, map ) {
 	var image = 'marker.png';
 	var myLatLng = new google.maps.LatLng(mark[1], mark[2]);
