@@ -29,5 +29,5 @@ for line in incsv:
             '%Y-%m-%dT%H:%M:%S')
     }
 
-    #requests.post('http://localhost:14441/api/1/report', data=json.dumps(accident))
-    requests.post('http://evilteam.com/api/1/report', data=json.dumps(accident))
+    requests.post('http://localhost:8888/api/1/report', data=json.dumps(accident))
+    #requests.post('http://evilteam.com/api/1/report', data=json.dumps(accident))
