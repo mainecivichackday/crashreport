@@ -52,7 +52,7 @@ function createMarker( mark, map ) {
 	
     google.maps.event.addListener( marker, 'click', function( a ) {
 	document.getElementById( 'sidebar' ).className = "in";
-	document.getElementById( 'sidebar' ).innerHTML = '<div class="leftcontent"><h4>' + marker.title + '</h4>' + '<br>' + mark[2].toString() + '</div>'; 
+	document.getElementById( 'sidebar' ).innerHTML = '<div class="leftcontent"><h4>' + marker.title + '</h4>' + '<br><p>' + mark[1].toString() + ',' + mark[2].toString() + '</p></div>'; 
     });
     return marker;
 
