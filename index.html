@@ -13,19 +13,15 @@
 
 $.ajax('/api/1/report', 
 	{
-		data: {
-			town:'Bangor'
-		},
 		dataType: 'json',
 		success: function (accidents, textStatus, jqXHR) {
 			console.log(textStatus,accidents);
 			for (var i=0; i<accidents.length; i++){
-				console.log(accidents[i].latitude, accidents[i].longitude)
+				console.log(accidents[i].location_start,accidents[i].latitude, accidents[i].longitude,i)
 			}
 		}
 	
 	});
-
 	
 
 function accident(town,county,locName,latitude,longitude,time,fatalities,weather,id,notes) {
