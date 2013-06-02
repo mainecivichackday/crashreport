@@ -96,7 +96,7 @@ class MainHandler(tornado.web.RequestHandler):
                     'location': location, 
                     'latitude': latitude, 
                     'longitude': longitude, 
-                    'time': time,
+                    'time': time.strformat("'%Y-%m-%dT%H:%M:%S'"),
                 })
                 self.write(crashinfo)
                 self.finish()
