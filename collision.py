@@ -33,21 +33,20 @@ class ReportHandler(tornado.web.RequestHandler):
     def get(self):
         query = urlparse.parse_qs(self.request.query)
 
+        res = [rkb.get(k).get_data() for k in rkb.get_keys()]
+
         riak_query = build_riak_query(query)
-        if riak_query is None:
-            self.send_error(status_code=403)
-            return
+        if riak_query is not None:
+            accident_search = rk.search('collisions', riak_query).run()
+            res = [a.get().get_data() for a in accident_search]
 
-        accident_search = rk.search('collisions', riak_query).run()
-
-        res = [a.get().get_data() for a in accident_search]
         for acc in res:
             for k, v in acc.items():
                 if k.endswith('_num'):
                     acc[k[:-4]] = acc[k]
                     del acc[k]
 
-        self.write(json.dumps([a.get().get_data() for a in accident_search]))
+        self.write(json.dumps(res))
         self.finish()
 
     def post(self):
