@@ -21,6 +21,7 @@ $.ajax('/api/1/report',
 				var loc = accidents[i].location_start;
 				loc.substring(0, str.length - 1);
 				markers.push( [loc,accidents[i].latitude, accidents[i].longitude,i] )
+				console.log(markers);
 			}
 		}
 	
