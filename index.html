@@ -121,8 +121,10 @@ function changeTotalCrashes(max){
 function changeYear(yr){
   for (var i=0; i<markers.length; i++){
     var y = markers[i][10];
+    console.log(y);
+    console.log(typeof y);
     y = y.substr(0,4);
-    y = parseFloat(y);
+    y = parseInt(y);
     console.log(y);
     if (yr == 0){
       markerName[i].setMap(map);
