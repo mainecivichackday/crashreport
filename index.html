@@ -19,7 +19,6 @@ $.ajax('/api/1/report',
 			for (var i=0; i<accidents.length; i++){
 				markers.push( [accidents[i].location_start,parseFloat(accidents[i].latitude), parseFloat(accidents[i].longitude),i] )
 			}
-			console.log("Request Complete!");
 			initialize();
 		}	
 	});
@@ -87,8 +86,6 @@ function initialize() {
                                 mapOptions);
   var x = new accident('Bangor','Penobscot','Union Street Ramp Intersections', 44.810427, -68.79227, '2013-05-30T10:28:12',1,'Snow',0);
   var y = new accident('Bangor','Penobscot','Union Street x I-95', 44.812121, -68.790245, '2013-06-01T12:37:04',0,'Raining',1);
-  
-  console.log(markers)
   setMarkers(window.map,markers);
 
 };
