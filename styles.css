@@ -25,6 +25,17 @@
 	margin-right:50px;
 
 }
+#inputform1  {
+    height:220px;
+    position:fixed;
+	right: 0;
+    background-color:#FFF;
+	color:#000;
+    width:600px;
+    display:block;
+	margin-right:50px;
+
+}
 #tableform {
 	max-width:600px;
 	
