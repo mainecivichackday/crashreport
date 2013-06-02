@@ -42,10 +42,11 @@ border-radius: 10px; /* future proofing */
 #tableform {
 	max-width:560px;
 	margin-left:20px;
+	margin-top:20px;
 	
 }
 #tableform td{
-	width:300px;
+	
 }
 
 .in {
