@@ -16,7 +16,6 @@ $.ajax('/api/1/report',
 	{
 		dataType: 'json',
 		success: function (accidents, textStatus, jqXHR) {
-			console.log(accidents);
 			for (var i=0; i<accidents.length; i++){
 				markers.push( [accidents[i].location_start,parseFloat(accidents[i].latitude), 
 				parseFloat(accidents[i].longitude),parseFloat(accidents[i].crf),
@@ -89,13 +88,12 @@ google.maps.event.addDomListener(window, 'load');
 
 //location point
  window.onload = function() {
-	document.getElementById('rightslide').addEventListener('click', function (point) {
-		document.getElementById( 'rightslide' ).className = "rightin";
-		google.maps.event.addListener(map, 'click', function() {
-		document.getElementById( 'rightslide' ).className = "rightout";
-	});
-	});
-	
+  document.getElementById('rightslide').addEventListener('click', function (point) {
+    document.getElementById( 'rightslide' ).className = "rightin";
+    google.maps.event.addListener(map, 'click', function() {
+    document.getElementById( 'rightslide' ).className = "rightout";
+    });
+  });
 	
   document.getElementById('add').addEventListener('click', function (point) {
    alert ("Click on the map, or select an already existing pointer, to mark the location of the crash.");
@@ -177,8 +175,8 @@ google.maps.event.addDomListener(window, 'load');
  <div id="rightslide">
    <img src="tools.png" style="margin-left:-35px; margin-top:-7px;">
    <form>
-<input type="checkbox" name="totalCrashes" value="GT10">Show total crashes &gt 10<br>
-<input type="checkbox" name="totalCrashes" value="GT20">Show total crashes &gt 20
+<input type="checkbox" name="totalGT10" value="GT10">Show total crashes &gt 10<br>
+<input type="checkbox" name="totalGT20" value="GT20">Show total crashes &gt 20
 </form>
    </div>
    </div>
