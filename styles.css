@@ -14,22 +14,22 @@
 	
 }
 #inputform  {
-    height:180px;
+    height:220px;
     position:fixed;
 	right: 0;
     background-color:#FFF;
 	color:#000;
-    width:500px;
+    width:600px;
     display:block;
 	margin-top:-300px;
 	margin-right:50px;
 
 }
 #tableform {
-	max-width:500px;	
+	max-width:600px;	
 }
 #tableform td, input{
-	max-width:166px;
+	max-width:200px;
 }
 .in {
 	margin-left: 0px !important;
