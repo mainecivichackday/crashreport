@@ -46,6 +46,12 @@ function submitAccident() {
 
   return false;
 };
+
+$('#new-accident-form').submit(function (e) {
+  e.preventDefault();
+  console.log('submitting new accident');
+  return false;
+})
 	
 function createMarker( mark, map ) {
 	var image = 'marker.png';
@@ -208,7 +214,7 @@ function cancel(){
 <div id="sidebar">My sidebar</div>
 <div id="inputform">
 
-<form onsubmit="this.preventDefault(); submitAccident(); return false;">
+<form id="new-accident-form">
 <table id="tableform"><tr>
 <td>Town/City:</td>
 <td> <input type="text" name="town" id="town"></td>
