@@ -7,14 +7,14 @@
     position:fixed;
     background-color:#000;
 	color:#FFF;
-    width:200px;
+    width:275px;
     display:block;
-	margin-left: -250px;
+	margin-left: -325px;
 	opacity:0.8;
 	
 }
 #inputform  {
-    height:220px;
+    height:240px;
     position:fixed;
 	right: 0;
     background-color:#FFF;
@@ -49,7 +49,7 @@ border-radius: 10px; /* future proofing */
 	transition: all 1s ease-in-out;
 }
 .out {
-	margin-left:-250px !important;
+	margin-left:-325px !important;
 	transition: all 1s ease-in-out;	
 }
 #over_map { 
