@@ -12,33 +12,18 @@
         <script>
 //Add data from riak DB
 var markers = [];
-
 $.ajax('/api/1/report', 
 	{
 		dataType: 'json',
 		success: function (accidents, textStatus, jqXHR) {
+			console.log(accidents);
 			for (var i=0; i<accidents.length; i++){
-				markers.push( [accidents[i].location_start,parseFloat(accidents[i].latitude), parseFloat(accidents[i].longitude),i] )
+				markers.push( [accidents[i].location_start,parseFloat(accidents[i].latitude), parseFloat(accidents[i].longitude),parseFloat(accidents[i].crf),parseFloat(accidents[i].total_crashes),i] )
 			}
 			initialize();
 		}	
 	});
 	
-
-function accident(town,county,locName,latitude,longitude,time,fatalities,weather,id,notes) {
-	// Object for individual accidents. Should be taken out once JSON data is coming in.
-	this.town = town;
-	this.county = county;
-	this.locName = locName;
-	this.latitude = latitude;
-	this.longitude = longitude;
-	this.time = time;
-	this.fatalities = fatalities;
-	this.weather = weather;
-	this.id = id;
-	this.notes = notes;
-};
-
 function createMarker( mark, map ) {
 	var image = 'marker.png';
 	var myLatLng = new google.maps.LatLng(mark[1], mark[2]);
@@ -47,7 +32,7 @@ function createMarker( mark, map ) {
         map: map,
         icon: image,
         title: mark[0],
-        zIndex: mark[3]
+        zIndex: mark[5]
     });
 	
     google.maps.event.addListener( marker, 'click', function( a ) {
@@ -85,8 +70,6 @@ function initialize() {
   }
   window.map = new google.maps.Map(document.getElementById('map-canvas'),
                                 mapOptions);
-  var x = new accident('Bangor','Penobscot','Union Street Ramp Intersections', 44.810427, -68.79227, '2013-05-30T10:28:12',1,'Snow',0);
-  var y = new accident('Bangor','Penobscot','Union Street x I-95', 44.812121, -68.790245, '2013-06-01T12:37:04',0,'Raining',1);
   setMarkers(window.map,markers);
 
 };
