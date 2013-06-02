@@ -23,6 +23,11 @@
     display:block;
 	margin-top:-300px;
 	margin-right:50px;
+	border: 2px groove threedface;
+	-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px; /* future proofing */
+-khtml-border-radius: 10px; /* for old Konqueror browsers */
 
 }
 #inputform1  {
@@ -34,6 +39,11 @@
     width:600px;
     display:block;
 	margin-right:50px;
+	border: 2px groove threedface;
+	-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px; /* future proofing */
+-khtml-border-radius: 10px; /* for old Konqueror browsers */
 
 }
 #tableform {
