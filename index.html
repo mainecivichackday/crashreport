@@ -149,6 +149,8 @@ function cancel(){
 		var newmarker = ['name',lat,long,3000];
 		old = createMarker(newmarker,window.map);
 		document.getElementById( 'inputform' ).className = "in2";
+		document.getElementById( 'lat' ).value = lat;
+		document.getElementById( 'long' ).value = long;
 	}
 	else {
 		var lat = event.latLng.lat();
@@ -157,6 +159,8 @@ function cancel(){
 		old = createMarker(newmarker,window.map);
 		clicked = true;
 		document.getElementById( 'inputform' ).className = "in2";
+		document.getElementById( 'lat' ).value = lat;
+		document.getElementById( 'long' ).value = long;
 		
 	
 	}
@@ -206,35 +210,12 @@ function cancel(){
 <td><textarea name="notes" cols="20" rows="3">
 </textarea></td>
 <td>Date:</td><td><input type="text" name="date"></td>
-<td width="0px"><input type="hidden" name="newlat"  width="0px"><input type="hidden" name="newlong" width="0px"></td>
+<td width="0px"><input type="hidden" name="newlat"  width="0px" id="lat"><input type="hidden" name="newlong" width="0px" id="long"></td>
 <td></td>
 
  </tr>
  <tr height="30px">
-  <div id="datetimepicker" class="input-append date">
-      <input type="text"></input>
-      <span class="add-on">
-        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-      </span>
-    </div>
-    <script type="text/javascript"
-     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-    </script> 
-    <script type="text/javascript"
-     src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
-    </script>
-    <script type="text/javascript"
-     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-    </script>
-    <script type="text/javascript"
-     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
-    </script>
-    <script type="text/javascript">
-      $('#datetimepicker').datetimepicker({
-        format: 'dd/MM/yyyy hh:mm:ss',
-        language: 'pt-BR'
-      });
-    </script>
+ 
  <td>
  <input type="submit" value="Submit">  
  <input type="button" value="Cancel" onclick="cancel()"> 
