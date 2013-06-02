@@ -14,7 +14,7 @@
 	
 }
 #inputform  {
-    height:200px;
+    height:180px;
     position:fixed;
 	right: 0;
     background-color:#FFF;
@@ -24,6 +24,12 @@
 	margin-top:-300px;
 	margin-right:50px;
 
+}
+#tableform {
+	max-width:500px;	
+}
+#tableform td, input{
+	max-width:166px;
 }
 .in {
 	margin-left: 0px !important;
