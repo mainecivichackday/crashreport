@@ -29,6 +29,25 @@ $.ajax('/api/1/report',
 			initialize();
 		}	
 	});
+function submitAccident() {
+	var accident = {
+		'latitude': document.getElementById('newlat').val,
+		'longitude': document.getElementById('newlong').val,
+		'state': document.getElementById('state').val,
+		'county': document.getElementById('county').val,
+		'actual_time': document.getElementById('actualtime').val,
+		'location': document.getElementById('location').val,
+		'fatalities': document.getElementById('fatal').val,
+		'notes': document.getElementById('notes').val
+		
+	}
+	$.post('/api/1/report', 
+	{	
+		data: {
+			accident: accident
+		}
+	});
+};
 	
 function createMarker( mark, map ) {
 	var image = 'marker.png';
@@ -190,25 +209,25 @@ function cancel(){
 <form  method="POST">
 <table id="tableform"><tr>
 <td>Town/City:</td>
-<td> <input type="text" name="town"></td>
+<td> <input type="text" name="town" id="town"></td>
 <td>County:</td>
-<td><input type="text" name="county"></td>
+<td><input type="text" name="county" id="county"></td>
 </tr>
 <tr>
 <td>State:</td>
-<td><input type="text" name="state"></td>
+<td><input type="text" name="state" id="state"></td>
 <td>Time:</td>
-<td><input type="text" name"actual_time">  </td>
+<td><input type="text" name"actual_time" id="actualtime">  </td>
 </tr>
 <tr>
 <td>Location Name:</td>
-<td><input type="text" name="location"></td>
+<td><input type="text" name="location" id="location"></td>
 <td>Fatalities:</td>
-<td><input type="text" name="fatalities"></td>
+<td><input type="text" name="fatalities" id="fatal"></td>
 </tr>
 <tr>
 <td>Notes:</td>
-<td><textarea name="notes" cols="20" rows="3">
+<td><textarea name="notes" cols="20" rows="3" id="notes">
 </textarea></td>
 <td>Date:</td><td><input type="text" name="date"></td>
 <td width="0px"><input type="hidden" name="newlat"  width="0px" id="newlat" ><input type="hidden" name="newlong" width="0px" id="newlong"></td>
