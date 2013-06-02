@@ -89,14 +89,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
   document.getElementById('add').addEventListener('click', function (point) {
    alert ("Click on the map, or select an already existing pointer, to mark the location of the crash.");
    //----
-<<<<<<< HEAD
-google.maps.event.addListener(map, 'click', function( event ){
-	var newlat = event.latLng.lat();
-	var newlong = event.latLng.lng();
-	var newmarker = ['name',newlat,newlong,3000];
-	createMarker(newmarker,window.map);
-});
-=======
    var clicked = false;
    var old;
    google.maps.event.addListener(map, 'click', function( event ){
@@ -117,7 +109,6 @@ google.maps.event.addListener(map, 'click', function( event ){
 	}
 	
    });
->>>>>>> dc917315ba4fdc7082b5508bf573ae1a7aeec8e7
    //----
    
   });
