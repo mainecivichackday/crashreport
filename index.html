@@ -18,7 +18,6 @@ $.ajax('/api/1/report',
 	{
 		dataType: 'json',
 		success: function (accidents, textStatus, jqXHR) {
-			console.log(accidents);
 			for (var i=0; i<accidents.length; i++){
 				markers.push( [accidents[i].location_start,parseFloat(accidents[i].latitude), 
 				parseFloat(accidents[i].longitude),parseFloat(accidents[i].crf),
@@ -123,11 +122,8 @@ function changeTotalCrashes(max){
 function changeYear(yr){
   for (var i=0; i<markers.length; i++){
     var y = markers[i][10];
-    console.log(y);
-    console.log(typeof y);
     y = y.substr(0,4);
     y = parseInt(y);
-    console.log(y);
     if (yr == 0){
       markerName[i].setMap(map);
     }
@@ -141,6 +137,18 @@ function changeYear(yr){
     }
   }
 }
+
+function changeCrf(max){
+  for (var i=0; i<markers.length; i++){
+    if (markers[i][3] < max){
+      markerName[i].setMap(null);
+    }
+    else{
+      markerName[i].setMap(map);
+    }
+  }
+}
+
 
 var old;
 function cancel(){
@@ -260,7 +268,14 @@ function cancel(){
 <h4>Year</h4>
 <input type="radio" name="years" checked value="all" onclick="changeYear(0)">All years<br>
 <input type="radio" name="years" value="2009" onclick="changeYear(2009)">2009-2011<br>
-<input type="radio" name="years" value="2013" onclick="changeYear(2013)">2013 
+<input type="radio" name="years" value="2013" onclick="changeYear(2013)">2013
+
+<h4>CRF</h4>
+<input type="radio" name="crf" checked value="all" onclick="changeCrf(0)">All CRF<br>
+<input type="radio" name="crf" value="2009" onclick="changeCrf(2)">CRF &gt 2<br>
+<input type="radio" name="crf" value="2013" onclick="changeCrf(3)">CRF &gt 3 
+
+ 
 </form>
 </div>
    </div>
