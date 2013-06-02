@@ -51,7 +51,7 @@ function createMarker( mark, map ) {
 	
     google.maps.event.addListener( marker, 'click', function( a ) {
 	document.getElementById( 'sidebar' ).className = "in";
-	document.getElementById( 'sidebar' ).innerHTML = '<h4>' + marker.title + '</h4>' + '<br>' + mark[2].toString() + '<br>'; 
+	document.getElementById( 'sidebar' ).innerHTML = '<div class="leftcontent"><h4>' + marker.title + '</h4>' + '<br>' + mark[2].toString() + '</div>'; 
     });
     return marker;
 
