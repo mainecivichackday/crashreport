@@ -57,6 +57,10 @@ border-radius: 10px; /* future proofing */
 	margin-top:100px !important;
 	transition: all 1s ease-in-out;
 }
+.out2 {
+	margin-top:-300px !important;
+	transition: all 1s ease-in-out;
+}
 .out {
 	margin-left:-325px !important;
 	transition: all 1s ease-in-out;	
