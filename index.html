@@ -30,22 +30,18 @@ $.ajax('/api/1/report',
 		}	
 	});
 function submitAccident() {
-	var accident = {
-		'latitude': document.getElementById('newlat').val,
-		'longitude': document.getElementById('newlong').val,
-		'state': document.getElementById('state').val,
-		'county': document.getElementById('county').val,
-		'actual_time': document.getElementById('actualtime').val,
-		'location': document.getElementById('location').val,
-		'fatalities': document.getElementById('fatal').val,
-		'notes': document.getElementById('notes').val
-		
-	}
 	$.post('/api/1/report', 
 	{	
 		data: {
-			accident: accident
-		}
+      'latitude': document.getElementById('newlat').val,
+      'longitude': document.getElementById('newlong').val,
+      'state': document.getElementById('state').val,
+      'county': document.getElementById('county').val,
+      'actual_time': document.getElementById('actualtime').val,
+      'location': document.getElementById('location').val,
+      'fatalities': document.getElementById('fatal').val,
+      'notes': document.getElementById('notes').val
+    }
 	});
 };
 	
