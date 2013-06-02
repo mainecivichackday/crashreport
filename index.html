@@ -11,7 +11,13 @@
         <script>
 //Add data from riak DB
 
-$.ajax('http://evilteam.com/api/1/report', {'town':'Bangor'},function(err,res){console.log(res)})
+$.ajax('http://evilteam.com/api/1/report', 
+	{
+		'data': {
+			'town':'Bangor'
+		}
+	},
+	function(err,res){console.log(res)})
 
 function accident(town,county,locName,latitude,longitude,time,fatalities,weather,id,notes) {
 	// Object for individual accidents. Should be taken out once JSON data is coming in.
