@@ -9,6 +9,10 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
      <link rel="stylesheet" type="text/css" href="styles.css" />
      <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300' rel='stylesheet' type='text/css'>
+     
+     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen"
+     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
         <script>
 //Add data from riak DB
 var markers = [];
@@ -101,6 +105,23 @@ function changeTotalCrashes(max){
   }
 }
 
+function changeYear(yr){
+  for (var i=0; i<markers.length; i++){
+    console.log(markers[i][4]);
+    if (yr == 0){
+      markerName[i].setMap(map);
+    }
+    else{
+      if (markers[i][4] == yr){
+        markerName[i].setMap(map);
+      }
+      else{
+        markerName[i].setMap(null);
+      }
+    }
+  }
+}
+
 function cancel(){
 	document.getElementById( 'inputform' ).className = "out2";
 }
@@ -160,8 +181,8 @@ function cancel(){
      <div id="over_map">
 <div id="sidebar">My sidebar</div>
 <div id="inputform">
-<form action="handler.php" method="POST">
-<form action="" method="POST">
+
+<form  method="POST">
 <table id="tableform"><tr>
 <td>Town/City:</td>
 <td> <input type="text" name="town"></td>
@@ -190,9 +211,33 @@ function cancel(){
 
  </tr>
  <tr height="30px">
+  <div id="datetimepicker" class="input-append date">
+      <input type="text"></input>
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+    </div>
+    <script type="text/javascript"
+     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+    </script> 
+    <script type="text/javascript"
+     src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+    </script>
+    <script type="text/javascript">
+      $('#datetimepicker').datetimepicker({
+        format: 'dd/MM/yyyy hh:mm:ss',
+        language: 'pt-BR'
+      });
+    </script>
  <td>
  <input type="submit" value="Submit">  
- <input type="submit" value="Cancel" onclick="cancel()"> 
+ <input type="button" value="Cancel" onclick="cancel()"> 
  </td> 
  </tr>
  </tr>    
@@ -209,6 +254,10 @@ function cancel(){
 <input type="radio" name="totalCrashes" value="GT20" onclick="changeTotalCrashes(20)">Show total crashes &gt 20<br>
 <input type="radio" name="totalCrashes" value="GT30" onclick="changeTotalCrashes(30)">Show total crashes &gt 30
 
+<h4>Year</h4>
+<input type="radio" name="years" checked value="all" onclick="changeYear(0)">Show all years<br>
+<input type="radio" name="years" value="2009" onclick="changeYear(2009)">Show 2009-2011<br>
+<input type="radio" name="years" value="2013" onclick="changeYear(2013)">Show 2013
 </form>
 </div>
    </div>
