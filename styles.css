@@ -101,7 +101,7 @@ border-radius: 10px; /* future proofing */
     position:fixed;
     background-color:#000;
 	color:#FFF;
-    width:200px;
+    width:197px;
     display:block;
 
 	opacity:0.8;
@@ -109,5 +109,9 @@ border-radius: 10px; /* future proofing */
 }
 .rightin {
 		margin-right: 0px !important;
+	transition: all 1s ease-in-out;
+}
+.rightout {
+		margin-right: -200px !important;
 	transition: all 1s ease-in-out;
 }

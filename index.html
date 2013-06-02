@@ -89,6 +89,14 @@ google.maps.event.addDomListener(window, 'load');
 
 //location point
  window.onload = function() {
+	document.getElementById('rightslide').addEventListener('click', function (point) {
+		document.getElementById( 'rightslide' ).className = "rightin";
+		google.maps.event.addListener(map, 'click', function() {
+		document.getElementById( 'rightslide' ).className = "rightout";
+	});
+	});
+	
+	
   document.getElementById('add').addEventListener('click', function (point) {
    alert ("Click on the map, or select an already existing pointer, to mark the location of the crash.");
    //----
@@ -119,6 +127,7 @@ google.maps.event.addDomListener(window, 'load');
 
 };
 //
+
 
     </script>
   </head>
@@ -166,7 +175,11 @@ google.maps.event.addDomListener(window, 'load');
 </form>
 </div>
  <div id="rightslide">
-   <img src="tools.png" style="margin-left:-30px; margin-top:-10px;">
+   <img src="tools.png" style="margin-left:-35px; margin-top:-7px;">
+   <form>
+<input type="checkbox" name="vehicle" value="Bike">I have a bike<br>
+<input type="checkbox" name="vehicle" value="Car">I have a car 
+</form>
    </div>
    </div>
    <img src="add.png"  id="add">
