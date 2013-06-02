@@ -53,11 +53,13 @@ function createMarker( mark, map ) {
 
 }
 
+var markerName = []
+
 function setMarkers(map, locations) {
   // Add markers to the map from locations
   window.allthemarkers = new Array();
   for (var i = 0; i < locations.length; i++) {
-	createMarker( locations[i], map );
+	markerName.push(createMarker( locations[i], map ));
   }
   google.maps.event.addListener(map, 'click', function() {
     document.getElementById( 'sidebar' ).className = "out";
@@ -91,11 +93,11 @@ function changeTotalCrashes(max){
   for (var i=0; i<markers.length; i++){
     console.log(markers[i][4]);
     if (markers[i][4] < max){
-	var m = markers[i];
-	console.log(m);
-	//markers[i].setMap(null);
+      markerName[i].setMap(null);
     }
-  console.log(max);
+    else{
+      markerName[i].setMap(map);
+    }
   }
 }
 //location point
@@ -194,6 +196,7 @@ function changeTotalCrashes(max){
    <div style="float:right; width:190px; font-size:14px;">
    <form>
 
+<input type="radio" name="totalCrashes" value="GT0" onclick="changeTotalCrashes(0)">Show all crashes<br>
 <input type="radio" name="totalCrashes" value="GT10" onclick="changeTotalCrashes(10)">Show total crashes &gt 10<br>
 <input type="radio" name="totalCrashes" value="GT20" onclick="changeTotalCrashes(20)">Show total crashes &gt 20<br>
 <input type="radio" name="totalCrashes" value="GT30" onclick="changeTotalCrashes(30)">Show total crashes &gt 30
