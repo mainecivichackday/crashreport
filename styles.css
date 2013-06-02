@@ -119,3 +119,10 @@ border-radius: 10px; /* future proofing */
 		margin-right: -200px !important;
 	transition: all 1s ease-in-out;
 }
+.toolclass h4{
+	color:#FFF;
+	border-color:#FFF;
+	border-bottom:solid;
+	padding:0px;
+	margin:3px;
+}
