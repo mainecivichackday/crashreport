@@ -12,17 +12,33 @@ rkb = rk.bucket('collisions')
 NUMERIC_FIELDS = ['county_rank', 'crf', 'latitude', 'longitude',
     'state_rank', 'total_crashes']
 
+SEARCHABLE_FIELDS = ['town', 'county', 'notes', 'crf', 'total_crashes',
+    'state_rank', 'county_rank', 'location_start', 'location_end']
+
+def build_riak_query(query):
+    for field in NUMERIC_FIELDS:
+        if '{}_start'.format(field) in query and '{}_end'.format(field) in query:
+            start = query['{}_start'.format(field)][0]
+            end = query['{}_end'.format(field)][0]
+            return '{}:[{} TO {}]'.format(field, start, end)
+
+    for field in SEARCHABLE_FIELDS:
+        if field in query:
+            return '{}:{}'.format(field, query[field][0])
+
+    return None
+
+
 class ReportHandler(tornado.web.RequestHandler):
     def get(self):
         query = urlparse.parse_qs(self.request.query)
-        for k, v in query.items():
-            if k not in ['town', 'county', 'notes']:
-                self.send_error(status_code=403)
-                self.finish()
-                return
 
-        town = query['town'][0]
-        accident_search = rk.search('collisions', 'town:{}'.format(town)).run()
+        riak_query = build_riak_query(query)
+        if riak_query is None:
+            self.send_error(status_code=403)
+            return
+
+        accident_search = rk.search('collisions', riak_query).run()
 
         res = [a.get().get_data() for a in accident_search]
         for acc in res:
