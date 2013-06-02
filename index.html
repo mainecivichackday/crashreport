@@ -21,7 +21,8 @@ $.ajax('/api/1/report',
 				markers.push( [accidents[i].location_start,parseFloat(accidents[i].latitude), 
 				parseFloat(accidents[i].longitude),parseFloat(accidents[i].crf),
 				parseFloat(accidents[i].total_crashes),
-				parseFloat(accidents[i].county_rank),parseFloat(accidents[i].state_rank), i] )
+				parseFloat(accidents[i].county_rank),parseFloat(accidents[i].state_rank),
+				accidents[i].county,accidents[i].town, i] )
 			}
 			initialize();
 		}	
@@ -35,13 +36,14 @@ function createMarker( mark, map ) {
         map: map,
         icon: image,
         title: mark[0],
-        zIndex: mark[7]
+        zIndex: mark[9]
     });
 	
     google.maps.event.addListener( marker, 'click', function( a ) {
 	document.getElementById( 'sidebar' ).className = "in";
 	document.getElementById( 'sidebar' ).innerHTML = 
 		'<div class="leftcontent"><h4>' + marker.title + '</h4>' + 
+		'<br><p> Town= ' + mark[8].toString() + '<br><p> County= ' + mark[7].toString() + 
 		'<br><p> Lat, Long= ' + mark[1].toString() + ', ' + mark[2].toString() + 
 		'<br><p> CRF= ' + mark[3].toString() + '<br><p>  Total Crashes= ' + mark[4].toString() +
 		'<br><p> County Rank= ' + mark[5].toString() + '<br><p> State Rank= ' + mark[6].toString() + '</p></div>'; 
