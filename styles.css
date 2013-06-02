@@ -92,3 +92,15 @@ border-radius: 10px; /* future proofing */
 	display:block;
 	z-index:99;
 }
+#rightslide {
+	 float:right;
+    height:320px;
+    position:fixed;
+    background-color:#000;
+	color:#FFF;
+    width:275px;
+    display:block;
+	margin-right: -325px;
+	opacity:0.8;
+	padding-left:10px;
+}
