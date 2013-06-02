@@ -24,7 +24,7 @@ $.ajax('/api/1/report',
 				parseFloat(accidents[i].longitude),parseFloat(accidents[i].crf),
 				parseFloat(accidents[i].total_crashes),
 				parseFloat(accidents[i].county_rank),parseFloat(accidents[i].state_rank),
-				accidents[i].county,accidents[i].town, accidents[i].notes, i] )
+				accidents[i].county,accidents[i].town, accidents[i].notes, accidents[i].time, i] )
 			}
 			initialize();
 		}	
@@ -38,7 +38,7 @@ function createMarker( mark, map ) {
         map: map,
         icon: image,
         title: mark[0],
-        zIndex: mark[10]
+        zIndex: mark[11]
     });
 	
     google.maps.event.addListener( marker, 'click', function( a ) {
@@ -49,7 +49,8 @@ function createMarker( mark, map ) {
 		'<br><p> Lat, Long= ' + mark[1].toString() + ', ' + mark[2].toString() + 
 		'<br><p> CRF= ' + mark[3].toString() + '<br><p>  Total Crashes= ' + mark[4].toString() +
 		'<br><p> County Rank= ' + mark[5].toString() + '<br><p> State Rank= ' + mark[6].toString() + 
-		'<br><p> Notes= ' + mark[9].toString() + '</p></div>'; 
+		'<br><p> Notes= ' + mark[9].toString() + 
+		'<br><p> Time= ' + mark[10].toString() + '</p></div>'; 
     });
     return marker;
 
@@ -105,7 +106,7 @@ function changeTotalCrashes(max){
 
 function changeYear(yr){
   for (var i=0; i<markers.length; i++){
-    console.log(markers[i][4]);
+    console.log(markers[i][10]);
     if (yr == 0){
       markerName[i].setMap(map);
     }
