@@ -13,13 +13,20 @@
 
 $.ajax('/api/1/report', 
 	{
-		'data': {
-			'town':'Bangor'
+		data: {
+			town:'Bangor'
 		},
-		'success': function (data, textStatus, jqXHR) {
-			console.log(textStatus,data);
+		dataType: 'json',
+		success: function (accidents, textStatus, jqXHR) {
+			console.log(textStatus,accidents);
+			for (var i=0; i<accidents.length; i++){
+				console.log(accidents[i].latitude, accidents[i].longitude)
+			}
 		}
+	
 	});
+
+	
 
 function accident(town,county,locName,latitude,longitude,time,fatalities,weather,id,notes) {
 	// Object for individual accidents. Should be taken out once JSON data is coming in.
