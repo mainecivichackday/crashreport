@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <title>Simple icons</title>
     <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
-    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script> 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
      <link rel="stylesheet" type="text/css" href="styles.css" />
         <script>
 //Add data from riak DB
 
+$.ajax('http://evilteam.com/api/1/report', {'town':'Bangor'},function(err,res){console.log(res)})
 
 function accident(town,county,locName,latitude,longitude,time,fatalities,weather,id,notes) {
 	// Object for individual accidents. Should be taken out once JSON data is coming in.
