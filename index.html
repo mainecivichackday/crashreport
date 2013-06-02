@@ -29,7 +29,7 @@ $.ajax('/api/1/report',
 function submitAccident() {
   console.log('submitting accident')
   
-  $.ajax('/api/1/report', 
+  $.ajax('/', 
 	{	
 		data: JSON.stringify({
       'latitude': document.getElementById('newlat').val,
@@ -223,7 +223,7 @@ function cancel(){
 <div id="sidebar"></div>
 <div id="inputform">
 
-<form onsubmit="return false;" id="new-accident-form">
+<form onsubmit="return submitAccident();" id="new-accident-form">
 <table id="tableform"><tr>
 <td>Town/City:</td>
 <td> <input type="text" name="town" id="town"></td>
