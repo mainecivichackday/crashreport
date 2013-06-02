@@ -76,7 +76,7 @@ class ReportHandler(tornado.web.RequestHandler):
 
 class MainHandler(tornado.web.RequestHandler):
         def get(self):
-                self.write(TLoader.load("index.htm").generate())
+                self.write(TLoader.load("index.html").generate())
                 self.finish()
         def post(self):
                 town = self.get_argument("town");
