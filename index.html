@@ -27,9 +27,11 @@ $.ajax('/api/1/report',
 		}	
 	});
 function submitAccident() {
-	$.post('/api/1/report', 
+  console.log('submitting accident')
+  
+  $.ajax('/api/1/report', 
 	{	
-		data: {
+		data: JSON.stringify({
       'latitude': document.getElementById('newlat').val,
       'longitude': document.getElementById('newlong').val,
       'state': document.getElementById('state').val,
@@ -38,7 +40,9 @@ function submitAccident() {
       'location': document.getElementById('location').val,
       'fatalities': document.getElementById('fatal').val,
       'notes': document.getElementById('notes').val
-    }
+    }),
+    contentType: 'application/json',
+    type: 'POST'
   });
 
   return false;
@@ -214,7 +218,7 @@ function cancel(){
 <div id="sidebar">My sidebar</div>
 <div id="inputform">
 
-<form action="submitAccident();">
+<form action="submitAccident();" onsubmit="submitAccident();">
 <table id="tableform"><tr>
 <td>Town/City:</td>
 <td> <input type="text" name="town" id="town"></td>
