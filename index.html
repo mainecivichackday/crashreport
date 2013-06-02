@@ -42,7 +42,9 @@ function submitAccident() {
       'fatalities': document.getElementById('fatal').val,
       'notes': document.getElementById('notes').val
     }
-	});
+  });
+
+  return false;
 };
 	
 function createMarker( mark, map ) {
@@ -206,7 +208,7 @@ function cancel(){
 <div id="sidebar">My sidebar</div>
 <div id="inputform">
 
-<form onsubmit="return false;">
+<form onsubmit="submitAccident()">
 <table id="tableform"><tr>
 <td>Town/City:</td>
 <td> <input type="text" name="town" id="town"></td>
