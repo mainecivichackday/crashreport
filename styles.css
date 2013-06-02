@@ -95,12 +95,17 @@ border-radius: 10px; /* future proofing */
 #rightslide {
 	 float:right;
     height:320px;
+	margin-top:100px;
     position:fixed;
     background-color:#000;
 	color:#FFF;
-    width:275px;
+    width:200px;
     display:block;
-	margin-right: -325px;
+	margin-right: -200px;
 	opacity:0.8;
 	padding-left:10px;
+}
+.rightin {
+		margin-right: 0px !important;
+	transition: all 1s ease-in-out;
 }
