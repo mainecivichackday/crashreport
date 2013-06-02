@@ -26,7 +26,7 @@ for line in incsv:
         'crf': l[-3],
     }
 
-    #requests.post('http://localhost:14441/1/report', data=json.dumps(accident))
-    requests.post('http://evilteam.com/api/1/report', data=json.dumps(accident))
+    requests.post('http://localhost:14441/api/1/report', data=json.dumps(accident))
+    #requests.post('http://evilteam.com/api/1/report', data=json.dumps(accident))
 
     #print accident['latitude'], accident['longitude'], accident['crf'], accident['county_rank'], accident['state_rank'], accident['town']
