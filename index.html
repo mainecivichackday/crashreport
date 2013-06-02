@@ -10,6 +10,7 @@
      <link rel="stylesheet" type="text/css" href="styles.css" />
         <script>
 //Add data from riak DB
+var markers = [];
 
 $.ajax('/api/1/report', 
 	{
@@ -17,7 +18,9 @@ $.ajax('/api/1/report',
 		success: function (accidents, textStatus, jqXHR) {
 			console.log(textStatus,accidents);
 			for (var i=0; i<accidents.length; i++){
-				console.log(accidents[i].location_start,accidents[i].latitude, accidents[i].longitude,i)
+				var loc = accidents[i].location_start;
+				loc.substring(0, str.length - 1);
+				markers.push( [loc,accidents[i].latitude, accidents[i].longitude,i] )
 			}
 		}
 	
@@ -86,10 +89,10 @@ function initialize() {
                                 mapOptions);
   var x = new accident('Bangor','Penobscot','Union Street Ramp Intersections', 44.810427, -68.79227, '2013-05-30T10:28:12',1,'Snow',0);
   var y = new accident('Bangor','Penobscot','Union Street x I-95', 44.812121, -68.790245, '2013-06-01T12:37:04',0,'Raining',1);
-  var markers = [
-	[x.locName,x.latitude,x.longitude,x.id],
-	[y.locName,y.latitude,y.longitude,y.id]
-  ];
+  //var markers = [
+  //	[x.locName,x.latitude,x.longitude,x.id],
+  //	[y.locName,y.latitude,y.longitude,y.id]
+  //];
   setMarkers(window.map,markers);
 
 };
