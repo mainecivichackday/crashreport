@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* CSS Document */
-#wrapper { position: relative; height:100%;}
+#wrapper { position: relative; height:100%; width:100%;}
 #sidebar {
     float:left;
     height:100%;
@@ -13,8 +13,34 @@
 	opacity:0.8;
 	
 }
+#inputform  {
+    height:220px;
+    position:fixed;
+	right: 0;
+    background-color:#FFF;
+	color:#000;
+    width:600px;
+    display:block;
+	margin-top:-300px;
+	margin-right:50px;
+
+}
+#tableform {
+	max-width:600px;
+	
+}
+#tableform td{
+	max-width:200px;
+}
+#tableform input {
+	max-width:100px;	
+}
 .in {
 	margin-left: 0px !important;
+	transition: all 1s ease-in-out;
+}
+.in2 {
+	margin-top:100px !important;
 	transition: all 1s ease-in-out;
 }
 .out {
