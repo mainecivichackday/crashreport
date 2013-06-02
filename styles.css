@@ -26,10 +26,14 @@
 
 }
 #tableform {
-	max-width:600px;	
+	max-width:600px;
+	
 }
-#tableform td, input{
+#tableform td{
 	max-width:200px;
+}
+#tableform input {
+	max-width:100px;	
 }
 .in {
 	margin-left: 0px !important;
