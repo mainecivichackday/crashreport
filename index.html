@@ -105,6 +105,23 @@ function changeTotalCrashes(max){
   }
 }
 
+function changeYear(yr){
+  for (var i=0; i<markers.length; i++){
+    console.log(markers[i][4]);
+    if (yr == 0){
+      markerName[i].setMap(map);
+    }
+    else{
+      if (markers[i][4] == yr){
+        markerName[i].setMap(map);
+      }
+      else{
+        markerName[i].setMap(null);
+      }
+    }
+  }
+}
+
 function cancel(){
 	document.getElementById( 'inputform' ).className = "out2";
 }
@@ -237,6 +254,10 @@ function cancel(){
 <input type="radio" name="totalCrashes" value="GT20" onclick="changeTotalCrashes(20)">Show total crashes &gt 20<br>
 <input type="radio" name="totalCrashes" value="GT30" onclick="changeTotalCrashes(30)">Show total crashes &gt 30
 
+<h4>Year</h4>
+<input type="radio" name="years" checked value="all" onclick="changeYear(0)">Show all years<br>
+<input type="radio" name="years" value="2009" onclick="changeYear(2009)">Show 2009-2011<br>
+<input type="radio" name="years" value="2013" onclick="changeYear(2013)">Show 2013
 </form>
 </div>
    </div>
