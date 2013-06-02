@@ -16,6 +16,7 @@ $.ajax('/api/1/report',
 	{
 		dataType: 'json',
 		success: function (accidents, textStatus, jqXHR) {
+			console.log(accidents);
 			for (var i=0; i<accidents.length; i++){
 				markers.push( [accidents[i].location_start,parseFloat(accidents[i].latitude), 
 				parseFloat(accidents[i].longitude),parseFloat(accidents[i].crf),
@@ -86,14 +87,20 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load');
 //Create the map using the initialize function
 
+function changeTotalCrashes(max){
+  
+  console.log(max);
+}
+
 //location point
  window.onload = function() {
-  document.getElementById('rightslide').addEventListener('click', function (point) {
-    document.getElementById( 'rightslide' ).className = "rightin";
-    google.maps.event.addListener(map, 'click', function() {
-    document.getElementById( 'rightslide' ).className = "rightout";
-    });
-  });
+	document.getElementById('rightslide').addEventListener('click', function (point) {
+		document.getElementById( 'rightslide' ).className = "rightin";
+		google.maps.event.addListener(map, 'click', function() {
+		document.getElementById( 'rightslide' ).className = "rightout";
+	});
+	});
+	
 	
   document.getElementById('add').addEventListener('click', function (point) {
    alert ("Click on the map, or select an already existing pointer, to mark the location of the crash.");
@@ -138,7 +145,7 @@ google.maps.event.addDomListener(window, 'load');
      <div id="over_map">
 <div id="sidebar">My sidebar</div>
 <div id="inputform">
-<form>
+<form action="handler.php" method="POST">
 <table id="tableform"><tr>
 <td>Town/City:</td>
 <td> <input type="text" name="town"></td>
@@ -174,10 +181,14 @@ google.maps.event.addDomListener(window, 'load');
 </div>
  <div id="rightslide">
    <img src="tools.png" style="margin-left:-35px; margin-top:-7px;">
+   <div style="float:right; width:190px; font-size:14px;">
    <form>
-<input type="checkbox" name="totalGT10" value="GT10">Show total crashes &gt 10<br>
-<input type="checkbox" name="totalGT20" value="GT20">Show total crashes &gt 20
+<input type="radio" name="totalCrashes" value="GT10" onclick="changeTotalCrashes(10)">Show total crashes &gt 10<br>
+<input type="radio" name="totalCrashes" value="GT20" onclick="changeTotalCrashes(20)">Show total crashes &gt 20<br>
+<input type="radio" name="totalCrashes" value="GT30" onclick="changeTotalCrashes(30)">Show total crashes &gt 30
+
 </form>
+</div>
    </div>
    </div>
    <img src="add.png"  id="add">
