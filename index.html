@@ -88,13 +88,16 @@ google.maps.event.addDomListener(window, 'load');
 //Create the map using the initialize function
 
 function changeTotalCrashes(max){
-  for (var i=0; i<markers.length(); i++){
-    if (marker[i].[4] < max){
-	marker.setMap(null);
-  }
+  for (var i=0; i<markers.length; i++){
+    console.log(markers[i][4]);
+    if (markers[i][4] < max){
+	var m = markers[i];
+	console.log(m);
+	//markers[i].setMap(null);
+    }
   console.log(max);
+  }
 }
-
 //location point
  window.onload = function() {
 	document.getElementById('rightslide').addEventListener('click', function (point) {
@@ -148,11 +151,8 @@ function changeTotalCrashes(max){
      <div id="over_map">
 <div id="sidebar">My sidebar</div>
 <div id="inputform">
-<<<<<<< HEAD
 <form action="handler.php" method="POST">
-=======
 <form action="" method="POST">
->>>>>>> 65e9e0ca751a8c59d6d175199d20e61a48af97de
 <table id="tableform"><tr>
 <td>Town/City:</td>
 <td> <input type="text" name="town"></td>
@@ -190,22 +190,10 @@ function changeTotalCrashes(max){
    <img src="tools.png" style="margin-left:-35px; margin-top:-7px;">
    <div style="float:right; width:190px; font-size:14px;">
    <form>
-<<<<<<< HEAD
+
 <input type="radio" name="totalCrashes" value="GT10" onclick="changeTotalCrashes(10)">Show total crashes &gt 10<br>
 <input type="radio" name="totalCrashes" value="GT20" onclick="changeTotalCrashes(20)">Show total crashes &gt 20<br>
 <input type="radio" name="totalCrashes" value="GT30" onclick="changeTotalCrashes(30)">Show total crashes &gt 30
-=======
-
-
-<input type="radio" name="totalCrashes" value="GT10">Show total crashes &gt 10<br>
-<input type="radio" name="totalCrashes" value="GT20">Show total crashes &gt 20
-
-<input type="checkbox" name="totalGT10" value="GT10">Show total crashes &gt 10<br>
-<input type="checkbox" name="totalGT20" value="GT20">Show total crashes &gt 20
-
-<input type="checkbox" name="totalGT10" value="GT10">Show total crashes &gt 10<br>
-<input type="checkbox" name="totalGT20" value="GT20">Show total crashes &gt 20
->>>>>>> 65e9e0ca751a8c59d6d175199d20e61a48af97de
 
 </form>
 </div>
