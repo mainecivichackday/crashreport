@@ -21,8 +21,7 @@ $.ajax('/api/1/report',
 				parseFloat(accidents[i].longitude),parseFloat(accidents[i].crf),
 				parseFloat(accidents[i].total_crashes),
 				parseFloat(accidents[i].county_rank),parseFloat(accidents[i].state_rank),
-				accidents[i].county,accidents[i].town, accidents[i].notes, accidents[i].time,
-				accidents[i].weather, i] )
+				accidents[i].county,accidents[i].town, accidents[i].notes, accidents[i].time, i] )
 			}
 			initialize();
 		}	
@@ -57,7 +56,7 @@ function createMarker( mark, map ) {
         map: map,
         icon: image,
         title: mark[0],
-        zIndex: mark[12]
+        zIndex: mark[11]
     });
 	
     google.maps.event.addListener( marker, 'click', function( a ) {
@@ -68,7 +67,6 @@ function createMarker( mark, map ) {
 		'<br><p> Lat, Long= ' + mark[1].toString() + ', ' + mark[2].toString() + 
 		'<br><p> CRF= ' + mark[3].toString() + '<br><p>  Total Crashes= ' + mark[4].toString() +
 		'<br><p> County Rank= ' + mark[5].toString() + '<br><p> State Rank= ' + mark[6].toString() + 
-		'<br><p> Weather= ' + mark[11].toString() + 
 		'<br><p> Time= ' + mark[10].toString() + 
 		'<br><p> Notes= ' + mark[9].toString() + '</p></div>'; 
     });
