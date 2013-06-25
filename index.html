@@ -10,10 +10,153 @@
      <link rel="stylesheet" type="text/css" href="styles.css" />
      <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300' rel='stylesheet' type='text/css'> 
         <script>
-//Add data from riak DB
+/**
+CREATING VARIABLES
+**/
+
+//Create the markers array, markerName array, and old to be used later
 var markers = [];
+var markerName = []
+var old;
+
+/**
+FUNCTIONS
+**/
+
+//Send data to the riak database
+function submitAccident() {
+	$.ajax('/', 
+		{	
+			data: JSON.stringify({
+      				'latitude': document.getElementById('newlat').val,
+      				'longitude': document.getElementById('newlong').val,
+      				'state': document.getElementById('state').val,
+      				'county': document.getElementById('county').val,
+      				'actual_time': document.getElementById('actualtime').val,
+      				'location': document.getElementById('location').val,
+      				'fatalities': document.getElementById('fatal').val,
+      				'notes': document.getElementById('notes').val
+    			}),
+    			contentType: 'application/json',
+    			type: 'POST'
+  		});
+
+  	return false;
+};
+
+//Function to create the parker to be put on the page through the Google Maps api
+function createMarker( mark, map ) {
+	var image = 'marker.png';
+	var myLatLng = new google.maps.LatLng(mark[1], mark[2]);
+   	var marker = new google.maps.Marker({
+        	position: myLatLng,
+        	map: map,
+        	icon: image,
+        	title: mark[0],
+       		zIndex: mark[11]
+    	});
+	
+	//Set listener to pop out sidebar with info about crash site
+	google.maps.event.addListener( marker, 'click', function( a ) {
+		document.getElementById( 'sidebar' ).className = "in";
+		document.getElementById( 'sidebar' ).innerHTML = 
+			'<div class="leftcontent"><h4>' + marker.title + '</h4>' + 
+			'<p> Town= ' + mark[8].toString() + '<br><p> County= ' + mark[7].toString() + 
+			'<br><p> Lat, Long= ' + mark[1].toString() + ', ' + mark[2].toString() + 
+			'<br><p> CRF= ' + mark[3].toString() + '<br><p>  Total Crashes= ' + mark[4].toString() +
+			'<br><p> County Rank= ' + mark[5].toString() + '<br><p> State Rank= ' + mark[6].toString() + 
+			'<br><p> Time= ' + mark[10].toString() + 
+			'<br><p> Notes= ' + mark[9].toString() + '</p></div>'; 
+    	});
+	
+	//This function returns the marker so that it can be deleted later if need be
+	return marker;
+
+}
+
+//Function to set the markers on the map
+function setMarkers(map, locations) {
+	// Add markers to the map from locations
+	window.allthemarkers = new Array();
+	for (var i = 0; i < locations.length; i++) {
+		markerName.push(createMarker( locations[i], map ));
+  	}
+
+	google.maps.event.addListener(map, 'click', function() {
+		document.getElementById( 'sidebar' ).className = "out";
+		document.getElementById( 'sidebar' ).innerHTML = '';
+  	});
+};
+
+//Initialize the Google map
+function initialize() {
+	var mapOptions = {
+		zoom: 13,
+		center: new google.maps.LatLng(44.809658,-68.770759),
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+  	}
+  	window.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  	setMarkers(window.map,markers);
+
+};
+
+//Function using the right sidebar to change the markers that are shown based on total crashes
+function changeTotalCrashes(max){
+	for (var i=0; i<markers.length; i++){
+		if (markers[i][4] < max){
+			markerName[i].setMap(null);
+		}
+		else{
+			markerName[i].setMap(map);
+		}
+	}
+}
+
+//Function using the right sidebar to change the markers that are shown based on year
+function changeYear(yr){
+	for (var i=0; i<markers.length; i++){
+		var y = markers[i][10];
+		y = y.substr(0,4);
+		y = parseInt(y);
+		if (yr == 0){
+			markerName[i].setMap(map);
+		}
+		else{
+			if (y == yr){
+				markerName[i].setMap(map);
+			}
+			else{
+				markerName[i].setMap(null);
+			}
+		}
+	}
+}
+
+//Function using the right sidebar to change the markers that are shown based on CRF
+function changeCrf(max){
+	for (var i=0; i<markers.length; i++){
+		if (markers[i][3] < max){
+			markerName[i].setMap(null);
+		}
+		else{
+			markerName[i].setMap(map);
+		}
+	}
+}
+
+//Function to cancel submitting data to database
+function cancel(){
+	document.getElementById( 'inputform' ).className = "out2";
+	old.setMap(null)
+}
+
+/**
+RUN COMMANDS
+**/
+
+//Add data from riak database
 $.ajax('/api/1/report', 
-	{
+	{	//Pull in the data and assign the properties to an accident in the accidents array
 		dataType: 'json',
 		success: function (accidents, textStatus, jqXHR) {
 			for (var i=0; i<accidents.length; i++){
@@ -23,192 +166,63 @@ $.ajax('/api/1/report',
 				parseFloat(accidents[i].county_rank),parseFloat(accidents[i].state_rank),
 				accidents[i].county,accidents[i].town, accidents[i].notes, accidents[i].time, i] )
 			}
+			//Run initialize to update the map on the page
 			initialize();
 		}	
-	});
-function submitAccident() {
-  console.log('submitting accident')
-  
-  $.ajax('/', 
-	{	
-		data: JSON.stringify({
-      'latitude': document.getElementById('newlat').val,
-      'longitude': document.getElementById('newlong').val,
-      'state': document.getElementById('state').val,
-      'county': document.getElementById('county').val,
-      'actual_time': document.getElementById('actualtime').val,
-      'location': document.getElementById('location').val,
-      'fatalities': document.getElementById('fatal').val,
-      'notes': document.getElementById('notes').val
-    }),
-    contentType: 'application/json',
-    type: 'POST'
-  });
+	}
+);
 
-  return false;
-};
+//Prepare to take data and send it to database
+$(document).ready(
+	function () {
+ 		console.log('document ready')
+  		$('#new-accident-report').submit(submitAccident());
+	}
+);
 
-$(document).ready(function () {
-  console.log('document ready')
-  $('#new-accident-report').submit(submitAccident());
-});
-
-function createMarker( mark, map ) {
-	var image = 'marker.png';
-	var myLatLng = new google.maps.LatLng(mark[1], mark[2]);
-   var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        icon: image,
-        title: mark[0],
-        zIndex: mark[11]
-    });
-	
-    google.maps.event.addListener( marker, 'click', function( a ) {
-	document.getElementById( 'sidebar' ).className = "in";
-	document.getElementById( 'sidebar' ).innerHTML = 
-		'<div class="leftcontent"><h4>' + marker.title + '</h4>' + 
-		'<p> Town= ' + mark[8].toString() + '<br><p> County= ' + mark[7].toString() + 
-		'<br><p> Lat, Long= ' + mark[1].toString() + ', ' + mark[2].toString() + 
-		'<br><p> CRF= ' + mark[3].toString() + '<br><p>  Total Crashes= ' + mark[4].toString() +
-		'<br><p> County Rank= ' + mark[5].toString() + '<br><p> State Rank= ' + mark[6].toString() + 
-		'<br><p> Time= ' + mark[10].toString() + 
-		'<br><p> Notes= ' + mark[9].toString() + '</p></div>'; 
-    });
-    return marker;
-
-}
-
-var markerName = []
-
-function setMarkers(map, locations) {
-  // Add markers to the map from locations
-  window.allthemarkers = new Array();
-  for (var i = 0; i < locations.length; i++) {
-	markerName.push(createMarker( locations[i], map ));
-  }
-  google.maps.event.addListener(map, 'click', function() {
-    document.getElementById( 'sidebar' ).className = "out";
-    document.getElementById( 'sidebar' ).innerHTML = '';
-  });
-
-  google.maps.event.addListener(map, 'click', function() {
-    document.getElementById( 'sidebar' ).className = "out";
-    document.getElementById( 'sidebar' ).innerHTML = '';
-  });
-  
-};
-
-function initialize() {
-  //Initialize the Google map
-  var mapOptions = {
-    zoom: 13,
-    center: new google.maps.LatLng(44.809658,-68.770759),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  }
-  window.map = new google.maps.Map(document.getElementById('map-canvas'),
-                                mapOptions);
-  setMarkers(window.map,markers);
-
-};
-
-google.maps.event.addDomListener(window, 'load');
 //Create the map using the initialize function
-
-function changeTotalCrashes(max){
-  for (var i=0; i<markers.length; i++){
-    if (markers[i][4] < max){
-      markerName[i].setMap(null);
-    }
-    else{
-      markerName[i].setMap(map);
-    }
-  }
-}
-
-function changeYear(yr){
-  for (var i=0; i<markers.length; i++){
-    var y = markers[i][10];
-    y = y.substr(0,4);
-    y = parseInt(y);
-    if (yr == 0){
-      markerName[i].setMap(map);
-    }
-    else{
-      if (y == yr){
-        markerName[i].setMap(map);
-      }
-      else{
-        markerName[i].setMap(null);
-      }
-    }
-  }
-}
-
-function changeCrf(max){
-  for (var i=0; i<markers.length; i++){
-    if (markers[i][3] < max){
-      markerName[i].setMap(null);
-    }
-    else{
-      markerName[i].setMap(map);
-    }
-  }
-}
-
-
-var old;
-function cancel(){
-	document.getElementById( 'inputform' ).className = "out2";
-	old.setMap(null)
-
-}
+google.maps.event.addDomListener(window, 'load');
 
 //location point
- window.onload = function() {
+window.onload = function() {
 	document.getElementById('rightslide').addEventListener('click', function (point) {
 		document.getElementById( 'rightslide' ).className = "rightin";
 		google.maps.event.addListener(map, 'click', function() {
-		document.getElementById( 'rightslide' ).className = "rightout";
-	});
+			document.getElementById( 'rightslide' ).className = "rightout";
+		});
 	});
 	
-	
-  document.getElementById('add').addEventListener('click', function (point) {
-   alert ("Click on the map, or select an already existing pointer, to mark the location of the crash.");
-   //----
-   var clicked = false;
-   google.maps.event.addListener(map, 'click', function( event ){
-	if (clicked == true) {
-		old.setMap(null)
-		var lat = event.latLng.lat();
-		var long = event.latLng.lng();
-		var newmarker = ['name',lat,long,3000];
-		old = createMarker(newmarker,window.map);
-		document.getElementById( 'inputform' ).className = "in2";
-		document.getElementById( 'newlat' ).value = lat;
-		document.getElementById( 'newlong' ).value = long;
-	}
-	else {
-		var lat = event.latLng.lat();
-		var long = event.latLng.lng();
-		var newmarker = ['name',lat,long,3000];
-		old = createMarker(newmarker,window.map);
-		clicked = true;
-		document.getElementById( 'inputform' ).className = "in2";
-		document.getElementById( 'newlat' ).value = lat;
-		document.getElementById( 'newlong' ).value = long;
+  	document.getElementById('add').addEventListener('click', function (point) {
+   		alert ("Click on the map, or select an already existing pointer, to mark the location of the crash.");
+   		var clicked = false;
+   		google.maps.event.addListener(map, 'click', function( event ){
+			if (clicked == true) {
+				old.setMap(null)
+				var lat = event.latLng.lat();
+				var long = event.latLng.lng();
+				var newmarker = ['name',lat,long,3000];
+				old = createMarker(newmarker,window.map);
+				document.getElementById( 'inputform' ).className = "in2";
+				document.getElementById( 'newlat' ).value = lat;
+				document.getElementById( 'newlong' ).value = long;
+			}
+			else {
+				var lat = event.latLng.lat();
+				var long = event.latLng.lng();
+				var newmarker = ['name',lat,long,3000];
+				old = createMarker(newmarker,window.map);
+				clicked = true;
+				document.getElementById( 'inputform' ).className = "in2";
+				document.getElementById( 'newlat' ).value = lat;
+				document.getElementById( 'newlong' ).value = long;
 		
 	
-	}
+			}
 	
-   });
-   //----
-   
-  });
+   		});   
+	});
 
 };
-//
 
 
     </script>
